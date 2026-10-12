@@ -1,0 +1,217 @@
+{
+  "roles": [
+    {
+      "name": "Software Engineer",
+      "category": "development",
+      "required_skills": {
+        "programming": 5,
+        "web_development": 4,
+        "databases": 4
+      },
+      "description": "Builds applications, solves technical problems, and works on scalable software products."
+    },
+    {
+      "name": "Web Developer",
+      "category": "development",
+      "required_skills": {
+        "programming": 4,
+        "web_development": 5,
+        "databases": 4,
+        "ui_ux": 3,
+        "api_development": 3
+      },
+      "description": "Builds websites and web applications for business and consumer use."
+    },
+    {
+      "name": "Data Analyst",
+      "category": "analytics",
+      "required_skills": {
+        "sql": 4,
+        "statistics": 5,
+        "data_visualization": 4
+      },
+      "description": "Transforms raw data into business insights and reports."
+    },
+    {
+      "name": "Data Scientist",
+      "category": "analytics",
+      "required_skills": {
+        "programming": 4,
+        "statistics": 5,
+        "machine_learning": 4,
+        "data_analysis": 5
+      },
+      "description": "Uses advanced analysis and machine learning to extract insights and predict trends."
+    },
+    {
+      "name": "Cybersecurity Analyst",
+      "category": "security",
+      "required_skills": {
+        "networking": 5,
+        "security_fundamentals": 5,
+        "operating_systems": 4,
+        "scripting": 3,
+        "risk_analysis": 4
+      },
+      "description": "Protects systems, networks, and data from cyber threats and vulnerabilities."
+    },
+    {
+      "name": "QA Engineer",
+      "category": "testing",
+      "required_skills": {
+        "testing": 5,
+        "documentation": 3,
+        "automation": 2
+      },
+      "description": "Ensures software quality by identifying bugs and validating system behavior."
+    },
+    {
+      "name": "Cloud / DevOps Engineer",
+      "category": "infrastructure",
+      "required_skills": {
+        "cloud": 5,
+        "linux": 4,
+        "networking": 4,
+        "scripting": 4,
+        "automation": 4
+      },
+      "description": "Supports deployment automation, infrastructure, monitoring, and cloud operations."
+    },
+    {
+      "name": "UI/UX Designer",
+      "category": "design",
+      "required_skills": {
+        "design_thinking": 5,
+        "prototyping": 4,
+        "user_research": 4,
+        "visual_design": 5,
+        "usability": 4
+      },
+      "description": "Designs user-friendly digital experiences and interface systems."
+    },
+    {
+      "name": "Network Engineer",
+      "category": "infrastructure",
+      "required_skills": {
+        "networking": 5,
+        "troubleshooting": 4,
+        "security_fundamentals": 3,
+        "systems": 3
+      },
+      "description": "Designs, implements, and maintains reliable network systems and services."
+    },
+    {
+      "name": "IT Support Specialist",
+      "category": "support",
+      "required_skills": {
+        "troubleshooting": 5,
+        "communication": 4,
+        "hardware_software": 3,
+        "documentation": 3
+      },
+      "description": "Provides technical support and assistance to end-users and resolves IT issues."
+    },
+    {
+      "name": "Database Administrator",
+      "category": "infrastructure",
+      "required_skills": {
+        "databases": 5,
+        "sql": 4,
+        "performance_tuning": 4,
+        "backup_recovery": 3,
+        "security_fundamentals": 3
+      },
+      "description": "Manages and maintains database systems, ensuring data integrity and performance."
+    },
+    {
+      "name": "Project Manager",
+      "category": "management",
+      "required_skills": {
+        "project_management": 5,
+        "risk_management": 3
+      },
+      "description": "Plans, executes, and oversees projects to ensure they are completed on time and within budget."
+    },
+    {
+      "name": "Business Analyst",
+      "category": "analytics",
+      "required_skills": {
+        "business_analysis": 5,
+        "problem_solving": 4,
+        "data_analysis": 3
+      },
+      "description": "Analyzes business needs and processes to recommend solutions and improvements."
+    },
+    {
+      "name": "Systems Administrator",
+      "category": "infrastructure",
+      "required_skills": {
+        "operating_systems": 5,
+        "networking": 4,
+        "scripting": 3,
+        "troubleshooting": 4,
+        "security_fundamentals": 3
+      },
+      "description": "Maintains and supports IT systems, ensuring their availability and performance."
+    },
+    {
+      "name": "Mobile App Developer",
+      "category": "development",
+      "required_skills": {
+        "programming": 5,
+        "mobile_development": 5,
+        "ui_ux": 4,
+        "api_integration": 3,
+        "testing": 3
+      },
+      "description": "Develops applications for mobile devices, ensuring performance and usability."
+    },
+    {
+      "name": "AI / Machine Learning Engineer",
+      "category": "development",
+      "required_skills": {
+        "programming": 5,
+        "machine_learning": 5,
+        "data_analysis": 4,
+        "statistics": 4
+      },
+      "description": "Designs and implements AI and machine learning models for various applications."
+    },
+    {
+      "name": "IT Consultant",
+      "category": "consulting",
+      "required_skills": {
+        "business_analysis": 4,
+        "project_management": 3,
+        "technology_advisory": 4
+      },
+      "description": "Provides expert advice and solutions to organizations on IT strategy and implementation."
+    },
+    {
+      "name": "System Analyst",
+      "category": "analysis",
+      "required_skills": {
+        "requirements_analysis": 5,
+        "system_design": 4,
+        "process_mapping": 4,
+        "technical_documentation": 3,
+        "sql": 3
+      },
+      "description": "Analyzes systems and business processes to propose effective solutions and documentation."
+    },
+    {
+      "name": "Data Engineer",
+      "category": "development",
+      "required_skills": {
+        "programming": 5,
+        "data_analysis": 4,
+        "database_design": 4,
+        "etl_processes": 3,
+        "cloud_platforms": 3
+      },
+      "description": "Designs and implements data pipelines and infrastructure for efficient data processing and analysis."
+    }
+
+
+  ]}
+
