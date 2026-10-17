@@ -1,273 +1,96 @@
-# Skill-to-Role Mapping and Data Analysis
+# Skill-to-Role Mapping and Recommendation Model
 
-## 1. Objective
+## 1. Purpose and source of truth
 
-This document defines the initial skill taxonomy and maps common IT roles to required competencies. It supports the recommendation logic for the career guidance system.
+This document describes how the career guide's role data is represented and used. The canonical skill IDs, display names, categories, and role-to-skill mappings are maintained in [`../data/it_career_roles.json`](../data/it_career_roles.json). Role data must reference those IDs exactly; assessment labels should use the catalog display names rather than introducing alternative IDs.
 
-## 2. Core Skill Categories
+Use lowercase `snake_case` IDs that remain stable if a display name changes. Similar-sounding skills remain separate when they describe different abilities, such as `databases` and `sql`, or `cloud_computing` and `linux`.
 
-The system will evaluate users across the following categories:
+## 2. Role-skill fields
 
-- Programming Fundamentals
-- Web Development
-- Databases
-- Networking and Systems
-- Data Analysis / Data Science
-- Cybersecurity
-- Cloud and DevOps
-- UI/UX Design
-- Software Testing
-- Problem Solving and Communication
+Each role's `required_skills` map uses a canonical skill ID and stores two separate values:
 
-## 3. Career Roles and Skill Focus
+| Field | Meaning | Allowed values |
+| --- | --- | --- |
+| `required_level` | Proficiency expected for the role | Integer 1–5 |
+| `importance_weight` | Relative influence of the skill on that role | Integer 1–5 |
 
-### 3.1 Software Engineer
+These values answer different questions: a skill can have a high expected proficiency but moderate relative importance, or vice versa. Initial role levels are migrated from the existing role data. The starter importance weights are set to 1 because the previous data did not distinguish importance from proficiency; weights should be adjusted only after validation with role descriptions, local job evidence, or stakeholders. These initial values are provisional, not measured labor-market facts.
 
-Key skills:
+## 3. Skill assessment scale
 
-- programming
-- data structures
-- web development
-- databases
-- problem solving
-- testing
+Users rate their own proficiency using a consistent scale:
 
-### 3.2 Web Developer
+| Level | Description |
+| --- | --- |
+| 1 | No practical knowledge yet |
+| 2 | Beginner: understands basic concepts or can complete simple tasks with guidance |
+| 3 | Developing: can complete common tasks with some guidance |
+| 4 | Proficient: can complete common tasks independently |
+| 5 | Advanced: can solve complex tasks and explain or guide others |
 
-Key skills:
+Ratings must be integers from 1 through 5. A missing answer is not a rating and must be kept distinct from level 1. Avoid presenting self-assessment as an objective certification of ability.
 
-- HTML/CSS/JavaScript
-- frontend frameworks
-- backend development
-- APIs
-- database usage
-- UI/UX awareness
+## 4. Recommendation scoring
 
-### 3.3 Data Analyst
+For role `r`, each required skill `s` has required level `L_s`, importance weight `W_s`, and a user rating `U_s` when answered.
 
-Key skills:
+For answered skills:
 
-- Excel / data tools
-- SQL
-- statistics
-- data visualization
-- problem solving
-- communication
+```text
+attainment_s = min(U_s, L_s) / L_s
+readiness_score_r = 100 * sum(attainment_s * W_s) / sum(W_s)
+```
 
-### 3.4 Data Scientist
+Only answered role skills contribute to the readiness numerator and denominator. Capping proficiency at the required level prevents extra proficiency in one skill from hiding a gap in another.
 
-Key skills:
+Assessment coverage is calculated independently:
 
-- Python/R
-- machine learning
-- statistics
-- data cleaning
-- analytics
-- experimentation
+```text
+coverage_r = 100 * sum(W_s for answered role skills) / sum(W_s for all role skills)
+```
 
-### 3.5 Cybersecurity Analyst
+If the user has not answered any required skill for a role, its coverage is 0% and its readiness score is unavailable because the readiness denominator is zero.
 
-Key skills:
+Only roles with at least 70% coverage are eligible for ranking. Under-covered roles are marked “insufficient assessment,” not assigned a misleading low score. Return up to five eligible roles, sorted by readiness descending and role name alphabetically for ties. If no role is eligible, ask for the unanswered skills needed to increase coverage.
 
-- networking
-- security fundamentals
-- operating systems
-- scripting
-- ethical hacking awareness
-- risk analysis
+Each result should explain its score with:
 
-### 3.6 QA Engineer
+- Coverage percentage
+- Assessed strengths that met or exceeded the requirement
+- Assessed gaps, including current level, required level, and numeric difference
+- Required skills not assessed, shown separately from confirmed gaps
 
-Key skills:
+Readiness is a transparent comparison against the current role catalog. It is not a probability of getting hired or a measure of overall employability.
 
-- testing concepts
-- documentation
-- bug analysis
-- automation basics
-- communication
-- software understanding
+## 5. Validation rules
 
-### 3.7 Cloud / DevOps Engineer
+Before scoring, validate that:
 
-Key skills:
+- Every role skill ID exists in the shared catalog.
+- Each `required_level` and `importance_weight` is an integer from 1 to 5.
+- Each submitted rating is either missing or an integer from 1 to 5.
+- A role has at least one required skill and a positive total importance weight.
 
-- Linux
-- cloud platforms
-- automation
-- networking
-- scripting
-- CI/CD and deployment
+Invalid catalog data or user input should produce a visible validation error; it must not be silently coerced into a score.
 
-### 3.8 UI/UX Designer
+## 6. Validation and refinement
 
-Key skills:
+The taxonomy and role requirements should be reviewed against:
 
-- design thinking
-- prototyping
-- user research
-- visual design
-- wireframing
-- usability
+- Common IT job titles and responsibilities in Sri Lanka
+- Local job descriptions and hiring trends
+- Undergraduate pathways and stakeholder feedback from students, advisors, and industry practitioners
 
-### 3.9 Network Engineer
+Keep a record of evidence, review dates, and changes when local market sources are collected. Until that review takes place, label the initial role requirements and weights as provisional. Revisit role coverage and weight choices when new evidence becomes available.
 
-Key skills:
+## 7. Initial role coverage
 
-- networking
-- troubleshooting
-- routing/switching
-- security basics
-- system administration
+The starter dataset currently contains roles across development, analytics, security, testing, design, infrastructure, support, management, consulting, and analysis. The JSON catalog is the authoritative list, including the role-to-skill details. Keep this document descriptive rather than maintaining a second numeric role matrix that can drift out of sync.
 
-### 3.10 IT Support Specialist
+## 8. Future enhancements
 
-Key skills:
-
-- troubleshooting
-- customer communication
-- operating systems
-- hardware and software support
-- documentation
-- problem solving
-
-### 3.11 Database Administrator
-
-Key skills:
-
-- SQL
-- database design
-- backup and recovery
-- performance tuning
-- data security
-- indexing and query optimization
-
-### 3.12 Project Manager
-
-Key skills:
-
-- project management
-- leadership
-- communication
-- risk management
-- time management
-- stakeholder coordination
-
-### 3.13 Business Analyst
-
-Key skills:
-
-- requirement gathering
-- process analysis
-- stakeholder communication
-- business logic
-- documentation
-- data interpretation
-
-### 3.14 Systems Administrator
-
-Key skills:
-
-- operating systems
-- networking
-- scripting
-- troubleshooting
-- system monitoring
-- security fundamentals
-
-### 3.15 Mobile App Developer
-
-Key skills:
-
-- mobile programming
-- UI/UX for mobile
-- API integration
-- app testing
-- database connectivity
-- performance optimization
-
-### 3.16 AI / Machine Learning Engineer
-
-Key skills:
-
-- Python
-- machine learning
-- statistics
-- data preprocessing
-- model evaluation
-- deployment basics
-
-### 3.17 IT Consultant
-
-Key skills:
-
-- technology advisory
-- business analysis
-- communication
-- problem solving
-- project management
-- strategic thinking
-
-### 3.18 System Analyst
-
-Key skills:
-
-- requirements analysis
-- system design
-- process mapping
-- technical documentation
-- SQL
-- communication and problem solving
-
-## 4. Recommendation Logic Idea
-
-A simple weighted matching approach can be used:
-
-- Each user rates their skill level from 1 to 5.
-- Each role has required skill weights.
-- The score for a role is calculated as:
-
-  role_score = sum(skill_level × weight)
-
-- The system ranks roles by score.
-- A skill gap is identified where user_skill < required_skill.
-
-## 5. Example Role Weight Table
-
-| Role                           | Programming | Web Dev | Database | Networking | Data/Analytics | Security | Design | Testing |
-| ------------------------------ | ----------- | ------- | -------- | ---------- | -------------- | -------- | ------ | ------- |
-| Software Engineer              | 5           | 4       | 4        | 2          | 2              | 2        | 1      | 3       |
-| Web Developer                  | 4           | 5       | 4        | 2          | 1              | 1        | 3      | 2       |
-| Data Analyst                   | 2           | 2       | 4        | 1          | 5              | 1        | 1      | 1       |
-| Data Scientist                 | 4           | 1       | 3        | 1          | 5              | 1        | 1      | 1       |
-| Cybersecurity Analyst          | 3           | 1       | 2        | 5          | 2              | 5        | 1      | 2       |
-| QA Engineer                    | 2           | 2       | 2        | 1          | 1              | 2        | 1      | 5       |
-| Cloud/DevOps Engineer          | 3           | 2       | 3        | 4          | 1              | 3        | 1      | 2       |
-| UI/UX Designer                 | 1           | 3       | 1        | 1          | 1              | 1        | 5      | 1       |
-| Network Engineer               | 2           | 1       | 1        | 5          | 1              | 3        | 1      | 1       |
-| IT Support Specialist          | 1           | 1       | 2        | 4          | 1              | 2        | 1      | 3       |
-| Database Administrator         | 2           | 1       | 5        | 2          | 2              | 3        | 1      | 1       |
-| Project Manager                | 1           | 1       | 2        | 1          | 2              | 1        | 1      | 2       |
-| Business Analyst               | 2           | 1       | 3        | 1          | 4              | 1        | 1      | 2       |
-| Systems Administrator          | 2           | 1       | 2        | 4          | 1              | 3        | 1      | 2       |
-| Mobile App Developer           | 4           | 3       | 3        | 1          | 1              | 1        | 3      | 2       |
-| AI / Machine Learning Engineer | 5           | 1       | 3        | 1          | 5              | 1        | 1      | 1       |
-| IT Consultant                  | 2           | 1       | 2        | 2          | 2              | 1        | 1      | 2       |
-| System Analyst                 | 2           | 2       | 3        | 2          | 3              | 1        | 1      | 2       |
-
-## 6. Data Analysis Notes
-
-- The role taxonomy should remain flexible and expandable.
-- Skills should reflect both technical and soft skills, since IT careers depend on communication and problem solving.
-- The system should emphasize student-friendly results instead of highly advanced role complexity.
-- Local relevance should be improved by adapting role names and skill priorities to the Sri Lankan job market context.
-
-## 7. Proposed Future Enhancements
-
-- Add local salary and demand indicators.
-- Include preferred job sectors (e.g., fintech, software, telecom, government, startups).
-- Add personality or interest-based filtering.
-- Add adaptive recommendation logic using actual user responses over time.
-
-## 8. Week 3–4 Outcome
-
-The project now has a base requirement specification and an initial skill-role matrix. This is the foundation for system design and recommendation engine implementation in the next phase.
+- Add dated Sri Lankan market evidence for role requirements and skill weights.
+- Add role-specific learning topics and milestones linked to canonical skill IDs.
+- Consider interests or preferred sectors as separate recommendation signals, with transparent explanations.
+- Reassess the scoring model only after collecting suitable evaluation feedback; do not introduce user-data-trained recommendations without a separate privacy and validation plan.

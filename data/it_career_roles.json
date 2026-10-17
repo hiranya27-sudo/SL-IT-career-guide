@@ -1,217 +1,691 @@
 {
+  "schema_version": 2,
+  "assessment_scale": {
+    "min": 1,
+    "max": 5,
+    "unanswered_value": null,
+    "labels": {
+      "1": "No practical knowledge yet",
+      "2": "Beginner; understands basics or completes simple tasks with guidance",
+      "3": "Developing; completes common tasks with some guidance",
+      "4": "Proficient; completes common tasks independently",
+      "5": "Advanced; solves complex tasks and can guide others"
+    }
+  },
+  "scoring": {
+    "minimum_coverage_percent": 70,
+    "maximum_recommendations": 5,
+    "tie_breaker": "role_name_ascending",
+    "readiness": "100 * sum((min(user_level, required_level) / required_level) * importance_weight) / sum(importance_weight for answered required skills)",
+    "coverage": "100 * sum(importance_weight for answered required skills) / sum(importance_weight for all required skills)"
+  },
+  "skills": [
+    {
+      "id": "api_development",
+      "name": "API Development",
+      "category": "software_development"
+    },
+    {
+      "id": "api_integration",
+      "name": "API Integration",
+      "category": "software_development"
+    },
+    {
+      "id": "automation",
+      "name": "Automation",
+      "category": "infrastructure"
+    },
+    {
+      "id": "backup_recovery",
+      "name": "Backup and Recovery",
+      "category": "infrastructure"
+    },
+    {
+      "id": "business_analysis",
+      "name": "Business Analysis",
+      "category": "business"
+    },
+    {
+      "id": "cloud_computing",
+      "name": "Cloud Computing",
+      "category": "infrastructure"
+    },
+    {
+      "id": "communication",
+      "name": "Communication",
+      "category": "professional"
+    },
+    {
+      "id": "data_analysis",
+      "name": "Data Analysis",
+      "category": "data"
+    },
+    {
+      "id": "data_visualization",
+      "name": "Data Visualization",
+      "category": "data"
+    },
+    {
+      "id": "database_design",
+      "name": "Database Design",
+      "category": "data"
+    },
+    {
+      "id": "databases",
+      "name": "Databases",
+      "category": "data"
+    },
+    {
+      "id": "design_thinking",
+      "name": "Design Thinking",
+      "category": "design"
+    },
+    {
+      "id": "documentation",
+      "name": "Technical Documentation",
+      "category": "professional"
+    },
+    {
+      "id": "etl_processes",
+      "name": "ETL Processes",
+      "category": "data"
+    },
+    {
+      "id": "hardware_software_support",
+      "name": "Hardware and Software Support",
+      "category": "support"
+    },
+    {
+      "id": "linux",
+      "name": "Linux",
+      "category": "infrastructure"
+    },
+    {
+      "id": "machine_learning",
+      "name": "Machine Learning",
+      "category": "data"
+    },
+    {
+      "id": "mobile_development",
+      "name": "Mobile Development",
+      "category": "software_development"
+    },
+    {
+      "id": "networking",
+      "name": "Networking",
+      "category": "infrastructure"
+    },
+    {
+      "id": "operating_systems",
+      "name": "Operating Systems",
+      "category": "infrastructure"
+    },
+    {
+      "id": "performance_tuning",
+      "name": "Performance Tuning",
+      "category": "data"
+    },
+    {
+      "id": "problem_solving",
+      "name": "Problem Solving",
+      "category": "professional"
+    },
+    {
+      "id": "process_mapping",
+      "name": "Process Mapping",
+      "category": "business"
+    },
+    {
+      "id": "programming",
+      "name": "Programming Fundamentals",
+      "category": "software_development"
+    },
+    {
+      "id": "project_management",
+      "name": "Project Management",
+      "category": "business"
+    },
+    {
+      "id": "prototyping",
+      "name": "Prototyping",
+      "category": "design"
+    },
+    {
+      "id": "requirements_analysis",
+      "name": "Requirements Analysis",
+      "category": "analysis"
+    },
+    {
+      "id": "risk_analysis",
+      "name": "Risk Analysis",
+      "category": "security"
+    },
+    {
+      "id": "risk_management",
+      "name": "Risk Management",
+      "category": "business"
+    },
+    {
+      "id": "scripting",
+      "name": "Scripting",
+      "category": "software_development"
+    },
+    {
+      "id": "security_fundamentals",
+      "name": "Security Fundamentals",
+      "category": "security"
+    },
+    {
+      "id": "sql",
+      "name": "SQL",
+      "category": "data"
+    },
+    {
+      "id": "statistics",
+      "name": "Statistics",
+      "category": "data"
+    },
+    {
+      "id": "system_administration",
+      "name": "System Administration",
+      "category": "infrastructure"
+    },
+    {
+      "id": "system_design",
+      "name": "System Design",
+      "category": "analysis"
+    },
+    {
+      "id": "technical_documentation",
+      "name": "Technical Documentation",
+      "category": "professional"
+    },
+    {
+      "id": "technology_advisory",
+      "name": "Technology Advisory",
+      "category": "business"
+    },
+    {
+      "id": "testing",
+      "name": "Software Testing",
+      "category": "software_quality"
+    },
+    {
+      "id": "troubleshooting",
+      "name": "Troubleshooting",
+      "category": "support"
+    },
+    {
+      "id": "ui_ux_design",
+      "name": "UI/UX Design",
+      "category": "design"
+    },
+    {
+      "id": "usability",
+      "name": "Usability",
+      "category": "design"
+    },
+    {
+      "id": "user_research",
+      "name": "User Research",
+      "category": "design"
+    },
+    {
+      "id": "visual_design",
+      "name": "Visual Design",
+      "category": "design"
+    },
+    {
+      "id": "web_development",
+      "name": "Web Development",
+      "category": "software_development"
+    }
+  ],
   "roles": [
     {
       "name": "Software Engineer",
       "category": "development",
+      "description": "Builds applications, solves technical problems, and works on scalable software products.",
       "required_skills": {
-        "programming": 5,
-        "web_development": 4,
-        "databases": 4
-      },
-      "description": "Builds applications, solves technical problems, and works on scalable software products."
+        "programming": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "web_development": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "databases": {
+          "required_level": 4,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Web Developer",
       "category": "development",
+      "description": "Builds websites and web applications for business and consumer use.",
       "required_skills": {
-        "programming": 4,
-        "web_development": 5,
-        "databases": 4,
-        "ui_ux": 3,
-        "api_development": 3
-      },
-      "description": "Builds websites and web applications for business and consumer use."
+        "programming": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "web_development": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "databases": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "ui_ux_design": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "api_development": {
+          "required_level": 3,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Data Analyst",
       "category": "analytics",
+      "description": "Transforms raw data into business insights and reports.",
       "required_skills": {
-        "sql": 4,
-        "statistics": 5,
-        "data_visualization": 4
-      },
-      "description": "Transforms raw data into business insights and reports."
+        "sql": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "statistics": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "data_visualization": {
+          "required_level": 4,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Data Scientist",
       "category": "analytics",
+      "description": "Uses advanced analysis and machine learning to extract insights and predict trends.",
       "required_skills": {
-        "programming": 4,
-        "statistics": 5,
-        "machine_learning": 4,
-        "data_analysis": 5
-      },
-      "description": "Uses advanced analysis and machine learning to extract insights and predict trends."
+        "programming": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "statistics": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "machine_learning": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "data_analysis": {
+          "required_level": 5,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Cybersecurity Analyst",
       "category": "security",
+      "description": "Protects systems, networks, and data from cyber threats and vulnerabilities.",
       "required_skills": {
-        "networking": 5,
-        "security_fundamentals": 5,
-        "operating_systems": 4,
-        "scripting": 3,
-        "risk_analysis": 4
-      },
-      "description": "Protects systems, networks, and data from cyber threats and vulnerabilities."
+        "networking": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "security_fundamentals": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "operating_systems": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "scripting": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "risk_analysis": {
+          "required_level": 4,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "QA Engineer",
       "category": "testing",
+      "description": "Ensures software quality by identifying bugs and validating system behavior.",
       "required_skills": {
-        "testing": 5,
-        "documentation": 3,
-        "automation": 2
-      },
-      "description": "Ensures software quality by identifying bugs and validating system behavior."
+        "testing": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "documentation": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "automation": {
+          "required_level": 2,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Cloud / DevOps Engineer",
       "category": "infrastructure",
+      "description": "Supports deployment automation, infrastructure, monitoring, and cloud operations.",
       "required_skills": {
-        "cloud": 5,
-        "linux": 4,
-        "networking": 4,
-        "scripting": 4,
-        "automation": 4
-      },
-      "description": "Supports deployment automation, infrastructure, monitoring, and cloud operations."
+        "cloud_computing": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "linux": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "networking": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "scripting": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "automation": {
+          "required_level": 4,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "UI/UX Designer",
       "category": "design",
+      "description": "Designs user-friendly digital experiences and interface systems.",
       "required_skills": {
-        "design_thinking": 5,
-        "prototyping": 4,
-        "user_research": 4,
-        "visual_design": 5,
-        "usability": 4
-      },
-      "description": "Designs user-friendly digital experiences and interface systems."
+        "design_thinking": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "prototyping": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "user_research": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "visual_design": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "usability": {
+          "required_level": 4,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Network Engineer",
       "category": "infrastructure",
+      "description": "Designs, implements, and maintains reliable network systems and services.",
       "required_skills": {
-        "networking": 5,
-        "troubleshooting": 4,
-        "security_fundamentals": 3,
-        "systems": 3
-      },
-      "description": "Designs, implements, and maintains reliable network systems and services."
+        "networking": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "troubleshooting": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "security_fundamentals": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "system_administration": {
+          "required_level": 3,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "IT Support Specialist",
       "category": "support",
+      "description": "Provides technical support and assistance to end-users and resolves IT issues.",
       "required_skills": {
-        "troubleshooting": 5,
-        "communication": 4,
-        "hardware_software": 3,
-        "documentation": 3
-      },
-      "description": "Provides technical support and assistance to end-users and resolves IT issues."
+        "troubleshooting": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "communication": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "hardware_software_support": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "documentation": {
+          "required_level": 3,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Database Administrator",
       "category": "infrastructure",
+      "description": "Manages and maintains database systems, ensuring data integrity and performance.",
       "required_skills": {
-        "databases": 5,
-        "sql": 4,
-        "performance_tuning": 4,
-        "backup_recovery": 3,
-        "security_fundamentals": 3
-      },
-      "description": "Manages and maintains database systems, ensuring data integrity and performance."
+        "databases": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "sql": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "performance_tuning": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "backup_recovery": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "security_fundamentals": {
+          "required_level": 3,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Project Manager",
       "category": "management",
+      "description": "Plans, executes, and oversees projects to ensure they are completed on time and within budget.",
       "required_skills": {
-        "project_management": 5,
-        "risk_management": 3
-      },
-      "description": "Plans, executes, and oversees projects to ensure they are completed on time and within budget."
+        "project_management": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "risk_management": {
+          "required_level": 3,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Business Analyst",
       "category": "analytics",
+      "description": "Analyzes business needs and processes to recommend solutions and improvements.",
       "required_skills": {
-        "business_analysis": 5,
-        "problem_solving": 4,
-        "data_analysis": 3
-      },
-      "description": "Analyzes business needs and processes to recommend solutions and improvements."
+        "business_analysis": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "problem_solving": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "data_analysis": {
+          "required_level": 3,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Systems Administrator",
       "category": "infrastructure",
+      "description": "Maintains and supports IT systems, ensuring their availability and performance.",
       "required_skills": {
-        "operating_systems": 5,
-        "networking": 4,
-        "scripting": 3,
-        "troubleshooting": 4,
-        "security_fundamentals": 3
-      },
-      "description": "Maintains and supports IT systems, ensuring their availability and performance."
+        "operating_systems": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "networking": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "scripting": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "troubleshooting": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "security_fundamentals": {
+          "required_level": 3,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Mobile App Developer",
       "category": "development",
+      "description": "Develops applications for mobile devices, ensuring performance and usability.",
       "required_skills": {
-        "programming": 5,
-        "mobile_development": 5,
-        "ui_ux": 4,
-        "api_integration": 3,
-        "testing": 3
-      },
-      "description": "Develops applications for mobile devices, ensuring performance and usability."
+        "programming": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "mobile_development": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "ui_ux_design": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "api_integration": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "testing": {
+          "required_level": 3,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "AI / Machine Learning Engineer",
       "category": "development",
+      "description": "Designs and implements AI and machine learning models for various applications.",
       "required_skills": {
-        "programming": 5,
-        "machine_learning": 5,
-        "data_analysis": 4,
-        "statistics": 4
-      },
-      "description": "Designs and implements AI and machine learning models for various applications."
+        "programming": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "machine_learning": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "data_analysis": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "statistics": {
+          "required_level": 4,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "IT Consultant",
       "category": "consulting",
+      "description": "Provides expert advice and solutions to organizations on IT strategy and implementation.",
       "required_skills": {
-        "business_analysis": 4,
-        "project_management": 3,
-        "technology_advisory": 4
-      },
-      "description": "Provides expert advice and solutions to organizations on IT strategy and implementation."
+        "business_analysis": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "project_management": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "technology_advisory": {
+          "required_level": 4,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "System Analyst",
       "category": "analysis",
+      "description": "Analyzes systems and business processes to propose effective solutions and documentation.",
       "required_skills": {
-        "requirements_analysis": 5,
-        "system_design": 4,
-        "process_mapping": 4,
-        "technical_documentation": 3,
-        "sql": 3
-      },
-      "description": "Analyzes systems and business processes to propose effective solutions and documentation."
+        "requirements_analysis": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "system_design": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "process_mapping": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "technical_documentation": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "sql": {
+          "required_level": 3,
+          "importance_weight": 1
+        }
+      }
     },
     {
       "name": "Data Engineer",
       "category": "development",
+      "description": "Designs and implements data pipelines and infrastructure for efficient data processing and analysis.",
       "required_skills": {
-        "programming": 5,
-        "data_analysis": 4,
-        "database_design": 4,
-        "etl_processes": 3,
-        "cloud_platforms": 3
-      },
-      "description": "Designs and implements data pipelines and infrastructure for efficient data processing and analysis."
+        "programming": {
+          "required_level": 5,
+          "importance_weight": 1
+        },
+        "data_analysis": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "database_design": {
+          "required_level": 4,
+          "importance_weight": 1
+        },
+        "etl_processes": {
+          "required_level": 3,
+          "importance_weight": 1
+        },
+        "cloud_computing": {
+          "required_level": 3,
+          "importance_weight": 1
+        }
+      }
     }
-
-
-  ]}
-
+  ]
+}
